@@ -3,7 +3,9 @@ class BookingsController < ApplicationController
 	before_action :set_corporate
 
 	def dashboard
-		
+		@bookings = Booking.all
+		@drivers = Driver.all
+		@corporates = Corporate.all
 	end
 
 	def index
