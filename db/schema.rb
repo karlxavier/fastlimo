@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161106092946) do
+ActiveRecord::Schema.define(version: 20161107111104) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,7 +24,7 @@ ActiveRecord::Schema.define(version: 20161106092946) do
 
   create_table "bookings", force: :cascade do |t|
     t.date     "book_date"
-    t.time     "book_time"
+    t.string   "book_time"
     t.integer  "car_type_id"
     t.string   "from_name"
     t.float    "from_lat"
@@ -42,10 +42,18 @@ ActiveRecord::Schema.define(version: 20161106092946) do
     t.integer  "booking_status_id"
     t.text     "remarks"
     t.integer  "driver_id"
+    t.string   "reference_no"
+    t.text     "execute_remarks"
   end
 
   create_table "car_types", force: :cascade do |t|
     t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "corporate_statuses", force: :cascade do |t|
+    t.string   "status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -56,6 +64,13 @@ ActiveRecord::Schema.define(version: 20161106092946) do
     t.string   "telephone"
     t.string   "account_no"
     t.integer  "status"
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
+    t.integer  "corporate_status_id"
+  end
+
+  create_table "driver_statuses", force: :cascade do |t|
+    t.string   "status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -63,8 +78,10 @@ ActiveRecord::Schema.define(version: 20161106092946) do
   create_table "drivers", force: :cascade do |t|
     t.string   "name"
     t.string   "mobile_no"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+    t.integer  "driver_status_id"
+    t.text     "remarks"
   end
 
   create_table "payment_types", force: :cascade do |t|

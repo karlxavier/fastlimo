@@ -4,6 +4,9 @@ Rails.application.routes.draw do
   resources :corporates do
     resources :bookings
   end
+  resources :drivers
 
+  get 'all_bookings', :to => 'bookings#all_bookings', :as => :all_bookings
+  get 'exe_bookings/:book_id', :to => 'bookings#exe_bookings', :as => :exe_bookings
   root to: "bookings#index"
 end

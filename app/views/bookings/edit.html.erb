@@ -1,6 +1,6 @@
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-10">
-        <h2>Create New Booking</h2>
+        <h2>Update Booking</h2>
         <ol class="breadcrumb">
             <li>
                 <a href="index.html">Home</a>
@@ -22,7 +22,10 @@
         <div class="col-lg-12">
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
-                    <h5>New - <small>Please complete all required fields.</small></h5>                  
+                    <h5>New - <small>Please complete all required fields.</small></h5>
+                      <div class="ibox-tools">
+                        <h2 class="text-danger"><%= @booking.reference_no %></h2>
+                    </div>
                 </div>
                 <div class="ibox-content">
                     <%= render 'form' %>

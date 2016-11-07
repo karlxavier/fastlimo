@@ -3,16 +3,44 @@ class BookingsController < ApplicationController
 	before_action :set_corporate
 
 	def index
+		@bookings = @corporate.bookings.all
 	end
 
 	def new
 		@corporate
-		@booking = Booking.new
-		@car_types = CarType.all
-		@payment_types = PaymentType.all
+		@booking = @corporate.bookings.new
+	end
+
+	def create
+		@booking = @corporate.bookings.new(booking_params)
+
+			if @booking.save
+				redirect_to root_path
+			else
+				render 'new'
+			end
+	end
+
+	def edit
+		@booking = Booking.find(params[:id])
 	end
 
 	def update
+		@booking = Booking.find(params[:id])
+
+		if @booking.update_attributes(booking_params)
+			redirect_to root_path
+		else
+			render 'edit'
+		end
+	end
+
+	def all_bookings		
+		@bookings = Booking.all
+	end
+
+	def exe_bookings		
+		@booking = Booking.find(params[:book_id])
 	end
 
 	private

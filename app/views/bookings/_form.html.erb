@@ -1,23 +1,32 @@
 <%= form_for [@corporate, @booking], html: { class: 'form-horizontal' } do |f|  %>
+	
 	<div class="row">
 		<div class="col-lg-6">
-			<div class="form-group" id="data_1">
-				<label class="col-sm-4 control-label">Pickup Date</label>
+			<div class="form-group" id="data_1">				
+				<%= f.label :book_date, class: "col-sm-4 control-label" %>
 		    <div class="col-sm-8">
 		    	<div class="input-group date">
 		        <span class="input-group-addon">
 		        <i class="fa fa-calendar"></i>
 		        </span>
-		        <input type="text" class="form-control" value="<%= Time.now.strftime("%m/%d/%Y") %>">
+		        <% if action_name == 'new' %>
+		        	<%= f.text_field :book_date, class: "form-control", value: Time.now.strftime('%m/%d/%Y') %>		        
+		        <% else %>
+		        	<%= f.text_field :book_date, class: "form-control", value: @booking.book_date.strftime('%m/%d/%Y') %>		        
+		        <% end %>
 		      </div>
 		    </div>
 		  </div>
 	  </div>
-	  <div class="col-lg-4">
-		  <div class="form-group">
-				<label class="col-sm-2 control-label">Time</label>
-		    <div class="col-sm-5">		    
-		        <input type="text" class="form-control" value="00:00">		   
+	  <div class="col-lg-6">
+		  <div class="form-group">			
+				<%= f.label :book_time, class: "col-sm-4 control-label" %>
+		    <div class="col-sm-3">		  		    		          		           
+		    	<% if action_name == 'new' %>
+		        	<%= f.text_field :book_time, class: "form-control", value: '00:00' %>
+		        <% else %>
+		        	<%= f.text_field :book_time, class: "form-control", value: @booking.book_time %>		        
+		        <% end %>
 		    </div>
 		  </div>
 		</div>
@@ -25,65 +34,79 @@
   <div class="hr-line-dashed"></div>
   <div class="row">
 	  <div class="col-lg-6">
-		  <div class="form-group">
-				<label class="col-sm-4 control-label">Car Type</label>
+		  <div class="form-group">				
+				<%= f.label :car_type_id, class: "col-sm-4 control-label" %>
 		    <div class="col-sm-6">	
-	    		<select class="select2_demo_1 form-control select2-hidden-accessible" tabindex="-1" aria-hidden="true">        
-            <% @car_types.each do |car_type| %>
-            	<option value="#{car_type.id}"><%= car_type.name %></option>
-            <% end %>
-        	</select>		        	   
+		    	<%= f.collection_select(:car_type_id, CarType.all, :id, :name, {}, {class: "form-control"}) %>	    			        	   
 		    </div>
 		  </div>
 		</div>
 		<div class="col-lg-6">
-		  <div class="form-group">
-				<label class="col-sm-4 control-label">Payment Type</label>
+		  <div class="form-group">				
+				<%= f.label :payment_type_id, class: "col-sm-4 control-label" %>
 		    <div class="col-sm-6">	
-	    		<select class="select2_demo_1 form-control select2-hidden-accessible" tabindex="-1" aria-hidden="true">        
-            <% @payment_types.each do |payment_type| %>
-            	<option value="#{payment_type.id}"><%= payment_type.name %></option>
-            <% end %>
-        	</select>		        	   
+	    		<%= f.collection_select(:payment_type_id, PaymentType.all, :id, :name, {}, {class: "form-control"}) %>	    			        	   	        	   
 		    </div>
 		  </div>
 		</div>
 	</div>
 	<div class="row">
 		<div class="col-lg-6">
-			<div class="form-group">
-				<label class="col-sm-4 control-label">Passenger's Name</label>
+			<div class="form-group">				
+				<%= f.label :passenger_name, class: "col-sm-4 control-label" %>
 		    <div class="col-sm-8">		    
-		        <input type="text" class="form-control" placeholder="Passenger's Name">		   
+		    	<%= f.text_field :passenger_name, class: "form-control", placeholder: "Passenger's Name" %>			        
+		    </div>
+		  </div>
+		</div>
+		<div class="col-lg-6">
+			<div class="form-group">				
+				<%= f.label :telephone_no, class: "col-sm-4 control-label" %>
+		    <div class="col-sm-8">		 		    	
+		    	<%= f.text_field :telephone_no, class: "form-control", placeholder: "Passenger's Mobile" %>	   		        
+		    </div>
+		  </div>
+		</div>
+	</div>	
+	<div class="row">
+		<div class="col-lg-12">
+			<div class="form-group">				
+				<%= f.label :remarks, class: "col-sm-2 control-label" %>
+		    <div class="col-sm-10">		    		        
+		      <%= f.text_field :remarks, class: "form-control", placeholder: "Your remarks here..." %>	   		        	   
+		    </div>
+		  </div>
+		</div>			
+	</div>
+	<div class="row">
+		<div class="col-lg-6">
+			<div class="form-group">				
+				<%= f.label :from_name, class: "col-sm-4 control-label" %>
+		    <div class="col-sm-8">		    		        
+		      <%= f.text_field :from_name, id: "geocompleteFrom", class: "form-control", placeholder: "From Address" %>	   		        	   
 		    </div>
 		  </div>
 		</div>
 		<div class="col-lg-6">
 			<div class="form-group">
-				<label class="col-sm-4 control-label">Telephone No.</label>
+				<%= f.label :to_name, class: "col-sm-4 control-label" %>
 		    <div class="col-sm-8">		    
-		        <input type="text" class="form-control" placeholder="Contact Number">		   
+		        <%= f.text_field :to_name, id: "geocompleteTo", class: "form-control", placeholder: "To Address" %>	   		        	   
 		    </div>
 		  </div>
 		</div>
 	</div>
 	<div class="hr-line-dashed"></div>
 	<div class="row">
-		<div class="col-lg-6">
-			<div class="form-group">
-				<label class="col-sm-4 control-label">From</label>
-		    <div class="col-sm-8">		    
-		        <input type="text" id="geocompleteFrom" class="form-control" placeholder="Enter From Location">		   
-		    </div>
-		  </div>
+		<div class="col-lg-3 pull-right">
+			<%= button_tag(type: 'Submit', class: "btn btn-primary btn-block") do %>
+        <i class="icon-ok icon-white"></i> Save
+      <% end %> 
 		</div>
-		<div class="col-lg-6">
-			<div class="form-group">
-				<label class="col-sm-4 control-label">To</label>
-		    <div class="col-sm-8">		    
-		        <input type="text" id="geocompleteTo" class="form-control geocomplete" placeholder="Enter To Location">		   
-		    </div>
-		  </div>
+		<div class="col-lg-3 pull-right">
+			<%= link_to root_path, class: "btn btn-default btn-block" do %>
+        <i class="icon-ok icon-white"></i> Cancel
+      <% end %> 
 		</div>
 	</div>
 

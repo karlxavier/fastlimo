@@ -1,0 +1,61 @@
+<%= form_for @corporate, html: { class: 'form-horizontal' } do |f|  %>
+	<div class="row">
+	  <div class="col-lg-6">
+		  <div class="form-group">				
+				<%= f.label :name, class: "col-sm-4 control-label" %>
+		    <div class="col-sm-8">	
+		    	<%= f.text_field :name, class: "form-control", placeholder: "Corporate's Name" %>	
+		    </div>
+		  </div>
+		</div>
+		<div class="col-lg-6">
+		  <div class="form-group">				
+				<%= f.label :corporate_status_id, class: "col-sm-4 control-label" %>
+		    <div class="col-sm-6">	
+	    		<%= f.collection_select(:corporate_status_id, CorporateStatus.all, :id, :status, {}, {class: "form-control"}) %>	    			        	   	        	   
+		    </div>
+		  </div>
+		</div>
+	</div>
+	<div class="row">
+	  <div class="col-lg-6">
+		  <div class="form-group">				
+				<%= f.label :address, class: "col-sm-4 control-label" %>
+		    <div class="col-sm-8">	
+		    	<%= f.text_field :address, class: "form-control", placeholder: "Address" %>	
+		    </div>
+		  </div>
+		</div>
+		<div class="col-lg-6">
+		  <div class="form-group">				
+				<%= f.label :telephone, class: "col-sm-4 control-label" %>
+		    <div class="col-sm-8">	
+	    		<%= f.text_field :telephone, class: "form-control", placeholder: "Telephone" %>	
+		    </div>
+		  </div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-lg-6">
+		  <div class="form-group">				
+				<%= f.label :account_no, class: "col-sm-4 control-label" %>
+		    <div class="col-sm-8">	
+	    		<%= f.text_field :account_no, class: "form-control", placeholder: "Account no." %>	
+		    </div>
+		  </div>
+		</div>
+	</div>
+	<div class="hr-line-dashed"></div>
+	<div class="row">
+		<div class="col-lg-3 pull-right">
+			<%= button_tag(type: 'Submit', class: "btn btn-primary btn-block") do %>
+        <i class="icon-ok icon-white"></i> Save
+      <% end %> 
+		</div>
+		<div class="col-lg-3 pull-right">
+			<%= link_to corporates_path, class: "btn btn-default btn-block" do %>
+        <i class="icon-ok icon-white"></i> Cancel
+      <% end %> 
+		</div>
+	</div>
+<% end %>

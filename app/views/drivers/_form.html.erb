@@ -1,0 +1,51 @@
+<%= form_for @driver, html: { class: 'form-horizontal' } do |f|  %>
+	<div class="row">
+	  <div class="col-lg-6">
+		  <div class="form-group">				
+				<%= f.label :name, class: "col-sm-4 control-label" %>
+		    <div class="col-sm-8">	
+		    	<%= f.text_field :name, class: "form-control", placeholder: "Driver's Name" %>	
+		    </div>
+		  </div>
+		</div>
+		<div class="col-lg-6">
+		  <div class="form-group">				
+				<%= f.label :driver_status_id, class: "col-sm-4 control-label" %>
+		    <div class="col-sm-6">	
+	    		<%= f.collection_select(:driver_status_id, DriverStatus.where('id NOT IN (?)', 3), :id, :status, {}, {class: "form-control"}) %>	    			        	   	        	   
+		    </div>
+		  </div>
+		</div>
+	</div>
+	<div class="row">
+	  <div class="col-lg-6">
+		  <div class="form-group">				
+				<%= f.label :mobile_no, class: "col-sm-4 control-label" %>
+		    <div class="col-sm-8">	
+		    	<%= f.text_field :mobile_no, class: "form-control", placeholder: "Mobile No." %>	
+		    </div>
+		  </div>
+		</div>
+		<div class="col-lg-6">
+		  <div class="form-group">				
+				<%= f.label :remarks, class: "col-sm-4 control-label" %>
+		    <div class="col-sm-8">	
+	    		<%= f.text_field :remarks, class: "form-control", placeholder: "Driver's remarks" %>	
+		    </div>
+		  </div>
+		</div>
+	</div>
+	<div class="hr-line-dashed"></div>
+	<div class="row">
+		<div class="col-lg-3 pull-right">
+			<%= button_tag(type: 'Submit', class: "btn btn-primary btn-block") do %>
+        <i class="icon-ok icon-white"></i> Save
+      <% end %> 
+		</div>
+		<div class="col-lg-3 pull-right">
+			<%= link_to drivers_path, class: "btn btn-default btn-block" do %>
+        <i class="icon-ok icon-white"></i> Cancel
+      <% end %> 
+		</div>
+	</div>
+<% end %>

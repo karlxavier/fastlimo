@@ -1,15 +1,12 @@
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-10">
-        <h2>My Bookings</h2>
+        <h2>All Corporate Bookings</h2>
         <ol class="breadcrumb">
             <li>
                 <%= link_to 'Home', root_path %>
-            </li>
-            <li>
-                <a>Bookings</a>
-            </li>
+            </li>        
             <li class="active">
-                <strong>Lists</strong>
+                <strong>Bookings</strong>
             </li>
         </ol>
     </div>
@@ -22,7 +19,7 @@
         <div class="col-lg-12">
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
-                    <h5>Lists - <small>You can see all bookings and their status.</small></h5>
+                    <h5>Lists - <small>You can see all corporate bookings and their status.</small></h5>
                 </div>
                 <div class="ibox-content">
                     <div class="row m-b-sm m-t-sm">
@@ -45,6 +42,9 @@
                                             </span>
                                         </td>
                                         <td class="project-status">
+                                            <h4 class="text-success"><%= truncate(booking.corporate.name, length: 10) %></h4>
+                                        </td>
+                                        <td class="project-status">
                                             <h4><%= booking.reference_no %></h4>
                                         </td>
                                         <td class="project-title">                                                                                        
@@ -55,16 +55,15 @@
                                             <small><%= booking.book_date.strftime('%m/%d/%Y') %></small>
                                         </td>
                                         <td class="project-completion">
-                                            <small><%= truncate(booking.from_name, length: 35) %></small>                                              
+                                            <small><%= truncate(booking.from_name, length: 30) %></small>                                              
                                         </td>    
                                         <td class="project-completion">
-                                            <small><%= truncate(booking.to_name, length: 35) %></small>                                              
+                                            <small><%= truncate(booking.to_name, length: 30) %></small>                                              
                                         </td>                                      
-                                        <td class="project-actions">
-                                            <a href="#" class="btn btn-white btn-sm"><i class="fa fa-folder"></i> View </a>                                            
-                                            <%= link_to edit_corporate_booking_path(corporate_id: current_user.corporate_id, id: booking.id), class: "btn btn-white btn-sm" do %>       
-                                                <i class="fa fa-pencil"></i> 
-                                                <span class="nav-label">Edit</span>
+                                        <td class="project-actions">                                            
+                                            <%= link_to exe_bookings_path(book_id: booking.id), class: "btn btn-success btn-sm" do %>       
+                                                <i class="fa fa-retweet"></i> 
+                                                <span class="nav-label">Execute</span>
                                             <% end %>
                                         </td>
                                     </tr>
