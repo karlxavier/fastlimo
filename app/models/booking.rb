@@ -22,6 +22,7 @@ class Booking < ActiveRecord::Base
   def set_booking_new
   	self.booking_status_id = 1
   end
+ 
 
   def generate_ref_id
     reference_no = 'BK'
