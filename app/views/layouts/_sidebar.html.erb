@@ -39,7 +39,7 @@
       <li>
         <%= link_to corporate_bookings_path(corporate_id: current_user.corporate_id) do %>       
         	<i class="fa fa-list"></i> 
-        	<span class="nav-label">Booking Lists</span>
+        	<span class="nav-label">My Booking Lists</span>
      		<% end %>
       </li>
       <% if current_user.super %>
@@ -47,6 +47,12 @@
           <%= link_to all_bookings_path do %>       
             <i class="fa fa-book"></i> 
             <span class="nav-label">Execute Bookings</span>
+          <% end %>
+        </li>
+        <li>
+          <%= link_to finished_bookings_path do %>       
+            <i class="fa fa-book"></i> 
+            <span class="nav-label">Finished Bookings</span>
           <% end %>
         </li>
       	<li>

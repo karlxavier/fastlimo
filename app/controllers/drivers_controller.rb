@@ -32,6 +32,11 @@ class DriversController < ApplicationController
 		end
 	end
 
+	def driver_history
+		@driver = Driver.find(params[:id])
+		@bookings = Booking.where('driver_id IN (?)', params[:id])
+	end
+
 	private
 
 		def driver_params

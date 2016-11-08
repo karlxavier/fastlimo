@@ -27,7 +27,7 @@
                 <div class="ibox-content">
                     <div class="row m-b-sm m-t-sm">
                         <div class="col-md-1">
-                            <button type="button" id="loading-example-btn" class="btn btn-white btn-sm"><i class="fa fa-refresh"></i> Refresh</button>
+                            <button type="button" id="loading-example-btn" onClick="window.location.reload()" class="btn btn-white btn-sm"><i class="fa fa-refresh"></i> Refresh</button>
                         </div>
                         <div class="col-md-11">
                             <div class="input-group"><input type="text" placeholder="Search" class="input-sm form-control"> <span class="input-group-btn">
@@ -60,7 +60,7 @@
                                             </a>
                                             <br>
                                             <small><%= driver.created_at.strftime('%m/%d/%Y') %></small>
-                                        </td>
+                                        </td>                                     
                                         <td class="project-completion">
                                             <small><%= driver.mobile_no %></small>                                              
                                         </td>    
@@ -68,7 +68,10 @@
                                             <small><%= truncate(driver.remarks, length: 40) %></small>                                              
                                         </td>                                      
                                         <td class="project-actions">
-                                            <a href="#" class="btn btn-white btn-sm"><i class="fa fa-folder"></i> View </a>                                            
+                                            <%= link_to driver_history_driver_path(id: driver.id), class: "btn btn-white btn-sm" do %>       
+                                                <i class="fa fa-pencil"></i> 
+                                                <span class="nav-label">History</span>
+                                            <% end %>                                           
                                             <%= link_to edit_driver_path(id: driver.id), class: "btn btn-white btn-sm" do %>       
                                                 <i class="fa fa-pencil"></i> 
                                                 <span class="nav-label">Edit</span>

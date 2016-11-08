@@ -51,7 +51,7 @@ class BookingsController < ApplicationController
 	end
 
 	def all_bookings		
-		@bookings = Booking.all.order('id desc')
+		@bookings = Booking.where('booking_status_id IN (?)', [1,2]).order('id desc')
 	end
 
 	def exe_bookings				
@@ -72,6 +72,10 @@ class BookingsController < ApplicationController
 				redirect_to all_bookings_path
 			end
 		end
+	end
+
+	def finished_bookings
+		@bookings = Booking.where('booking_status_id IN (?)', 3).order('id desc')
 	end
 
 	private

@@ -1,0 +1,84 @@
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>Driver's Booking History</h2>
+        <ol class="breadcrumb">
+            <li>
+                <a href="index.html">Home</a>
+            </li>
+            <li>
+                <a>Drivers</a>
+            </li>
+            <li class="active">
+                <strong>History</strong>
+            </li>
+        </ol>
+    </div>
+    <div class="col-lg-2">
+
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="wrapper wrapper-content animated fadeInRight">
+            <div class="ibox-content m-b-sm border-bottom">
+                <div class="p-xs">
+                    <div class="pull-left m-r-md">
+                        <i class="fa fa-user-circle text-navy mid-icon"></i>
+                    </div>
+                    <h2><%= @driver.name %> - <small><%= @driver.mobile_no %></small></h2>
+                    <span><%= @driver.driver_status.status %></span>                    
+                </div>
+            </div>
+            <div class="ibox-content forum-container">
+                <div class="forum-title">
+                    <div class="pull-right forum-desc">
+                        <samll>Total Bookings: <%= Booking.where('driver_id IN (?)', @driver.id).count %></samll>
+                    </div>
+                    <h3>Bookings</h3>
+                </div>
+                <% @bookings.each do |booking| %>
+                    <div class="forum-item active">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="forum-icon">
+                                    <i class="fa fa-address-card"></i>
+                                </div>
+                                <%= link_to corporate_booking_path(corporate_id: booking.corporate_id, id: booking.id), class: "forum-item-title" do %>                                           
+                                    <%= booking.reference_no %>
+                                <% end %>                                
+                                <div class="forum-sub-title">
+                                    <strong><%= booking.corporate.name %>: </strong>
+                                    <%= booking.passenger_name %>
+                                </div>
+                            </div>
+                            <div class="col-md-2 forum-info">
+                                <span class="views-number">
+                                    <h4><%= booking.booking_status.status %></h4>
+                                </span>
+                                <div>
+                                    <small>Status</small>
+                                </div>
+                            </div>
+                            <div class="col-md-2 forum-info">
+                                <span class="views-number">
+                                    <h4><%= booking.book_date.strftime('%m/%d/%Y') %></h4>
+                                </span>
+                                <div>
+                                    <small>Book Date</small>
+                                </div>
+                            </div>
+                            <div class="col-md-2 forum-info">
+                                <span class="views-number">
+                                    <h4><%= booking.finished_on.to_date.strftime('%m/%d/%Y') if booking.finished_on.present? %></h4>
+                                </span>
+                                <div>
+                                    <small>Finished On</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <% end %>
+            </div>
+        </div>
+    </div>
+</div>
