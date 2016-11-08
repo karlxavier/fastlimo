@@ -23,6 +23,9 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'pg'
 gem 'devise'
 gem "font-awesome-rails"
+gem 'geocoder'
+gem 'gmaps4rails'
+gem 'underscore-rails', '~> 1.8', '>= 1.8.3'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

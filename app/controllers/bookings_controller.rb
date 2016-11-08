@@ -78,6 +78,13 @@ class BookingsController < ApplicationController
 		@bookings = Booking.where('booking_status_id IN (?)', 3).order('id desc')
 	end
 
+	def bookingmap
+		@booking = Booking.find(params[:book_id])		
+		respond_to do |format|
+			format.js
+		end
+	end
+
 	private
 
 		def booking_params

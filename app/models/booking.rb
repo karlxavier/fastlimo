@@ -6,6 +6,7 @@ class Booking < ActiveRecord::Base
 	belongs_to :driver
 	before_create :set_booking_new
 	before_create :generate_ref_id
+  before_save :geocode_endpoints
 
 	validate :book_date_is_valid_datetime
 	validate :book_time_is_valid_time
@@ -23,6 +24,23 @@ class Booking < ActiveRecord::Base
   	self.booking_status_id = 1
   end
  
+  def geocode_endpoints
+    if from_name_changed?
+      geocoded = Geocoder.search(from_name).first
+      if geocoded
+        self.from_lat = geocoded.latitude
+        self.from_lng = geocoded.longitude
+      end
+    end
+    # Repeat for destination
+    if to_name_changed?
+      geocoded = Geocoder.search(to_name).first
+      if geocoded
+        self.to_lat = geocoded.latitude
+        self.to_lng = geocoded.longitude
+      end
+    end
+  end
 
   def generate_ref_id
     reference_no = 'BK'

@@ -71,6 +71,10 @@
                                             <small><%= truncate(booking.to_name, length: 35) %></small>                                              
                                         </td>                                      
                                         <td class="project-actions">
+                                                <%= link_to bookingmap_path(book_id: booking.id), class: "btn btn-default btn-sm", remote: true do %>       
+                                                    <i class="fa fa-globe"></i> 
+                                                    <span class="nav-label">Map</span>
+                                                <% end %>
                                             <% if booking.booking_status_id == 1 %>                                   
                                                 <%= link_to edit_corporate_booking_path(corporate_id: current_user.corporate_id, id: booking.id), class: "btn btn-white btn-sm" do %>       
                                                     <i class="fa fa-pencil"></i> 
