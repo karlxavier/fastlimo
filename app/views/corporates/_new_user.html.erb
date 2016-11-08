@@ -1,0 +1,96 @@
+<div class="modal inmodal fade" id="modal-shows" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true">×</span>                        
+                </button>
+                <h4 class="modal-title">Create New User</h4>
+                <small class="font-bold">For corporate clients</small>                     
+            </div>
+            <div class="modal-body">
+                <div class="wrapper wrapper-content animated fadeInRight">
+                  <div class="row">
+                      <div class="col-lg-12">
+                          <div class="ibox float-e-margins">
+                              <div class="ibox-title">
+                                  <h5>New - <small>Please complete all required fields.</small></h5>                  
+                              </div>
+                              <div class="ibox-content">
+                                  <%= form_for resource, :as => resource_name, :url => registration_path(resource_name), html: { class: 'form-horizontal' } do |f| %>
+                                    <%= devise_error_messages! %>                    
+                                        <div class="row">
+                                          <div class="col-lg-6">
+                                            <div class="form-group">        
+                                              <%= f.label :email, class: "col-sm-4 control-label" %>
+                                              <div class="col-sm-8">        
+                                                <%= f.email_field :email, class: "form-control", placeholder: "Email" %>             
+                                              </div>
+                                            </div>
+                                          </div>
+                                          <div class="col-lg-6">
+                                            <div class="form-group">        
+                                              <%= f.label :fullname, class: "col-sm-4 control-label" %>
+                                              <div class="col-sm-8">              
+                                                <%= f.text_field :fullname, class: "form-control", placeholder: "User Fullname" %>               
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </div>
+                                          <div class="row">
+                                            <div class="col-lg-6">
+                                              <div class="form-group">        
+                                                <%= f.label :corporate_id, class: "col-sm-4 control-label" %>
+                                                <div class="col-sm-6">  
+                                                  <%= f.collection_select(:corporate_id, Corporate.all, :id, :name, {}, {class: "form-control"}) %>
+                                                </div>
+                                              </div>
+                                            </div>
+                                           
+                                          </div>
+                                          <div class="row">
+                                             <div class="col-lg-6">
+                                              <div class="form-group">        
+                                                <%= f.label :password, class: "col-sm-4 control-label" %>
+                                                <div class="col-sm-6">  
+                                                  <% if @minimum_password_length %>
+                                                  <em>(<%= @minimum_password_length %> characters minimum)</em>
+                                                  <% end %><br />
+                                                  <%= f.password_field :password, class: "form-control", autocomplete: "off" %>                                                                       
+                                                </div>
+                                              </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                              <div class="form-group">        
+                                                <%= f.label :password_confirmation, 'Confirmation', class: "col-sm-4 control-label" %>
+                                                <div class="col-sm-8">        
+                                                  <%= f.password_field :password_confirmation, class: "form-control", placeholder: "Confirm Email" %>             
+                                                </div>
+                                              </div>
+                                            </div>                       
+                                          </div>
+                                          <div class="hr-line-dashed"></div>
+                                          <div class="row">
+                                            <div class="col-lg-3 pull-right">
+                                              <%= button_tag(type: 'Submit', class: "btn btn-primary btn-block") do %>
+                                                <i class="icon-ok icon-white"></i> Save
+                                              <% end %> 
+                                            </div>
+                                            <div class="col-lg-3 pull-right">
+                                              <%= link_to root_path, class: "btn btn-default btn-block" do %>
+                                                <i class="icon-ok icon-white"></i> Cancel
+                                              <% end %> 
+                                            </div>
+                                          </div>
+                                  <% end %>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+            <div class="modal-footer">
+                <button type="button" class="btn-cust btn-white" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>

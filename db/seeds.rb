@@ -5,4 +5,9 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
-User.create(fullname: 'Karl Xavier del Campo', email: 'karlxavier@enguae.com',super: true, password: 'rupert10')
+# User.create(fullname: 'Karl Xavier del Campo', email: 'karlxavier@enguae.com',super: true, password: 'rupert10')
+
+
+# BookingStatus.create(id: 1, status: 'New')
+# BookingStatus.create(id: 2, status: 'Progress')
+# BookingStatus.create(id: 3, status: 'Finished')

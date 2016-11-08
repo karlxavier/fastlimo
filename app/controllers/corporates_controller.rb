@@ -32,6 +32,12 @@ class CorporatesController < ApplicationController
 		end
 	end
 
+	def new_user	
+		respond_to do |format|
+			format.js
+		end
+	end
+
 	private
 
 		def corporate_params
