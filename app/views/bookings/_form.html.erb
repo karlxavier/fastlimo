@@ -111,15 +111,13 @@
 	</div>
 
   <script type="text/javascript">
-  	$(document).ready(function(){
+
   		$('#data_1 .input-group.date').datepicker({
           todayBtn: "linked",
           keyboardNavigation: false,
           forceParse: false,       
           autoclose: true
-      });
-
-      $(".select2_demo_1").select2();
+      });     
 
       $("#geocompleteFrom").geocomplete({     
         	details: ".field",
@@ -133,7 +131,7 @@
             componentRestrictions: {country: "ae"},
         });
 
-  	})
+
   </script>
 
 <% end %>

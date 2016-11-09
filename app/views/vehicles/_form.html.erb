@@ -1,0 +1,103 @@
+<%= form_for @vehicle, html: { class: 'form-horizontal' } do |f|  %>
+	<div class="row">
+		<div class="col-lg-6">
+		  <div class="form-group">				
+				<%= f.label :car_type_id, class: "col-sm-4 control-label" %>
+		    <div class="col-sm-6">	
+	    		<%= f.collection_select(:car_type_id, CarType.all, :id, :name, {}, {class: "form-control"}) %>	    			        	   	        	   
+		    </div>
+		  </div>
+		</div>
+		<div class="col-lg-6">
+		  <div class="form-group">				
+				<%= f.label :veh_manufacturer_id, class: "col-sm-4 control-label" %>
+		    <div class="col-sm-6">	
+	    		<%= f.collection_select(:veh_manufacturer_id, VehManufacturer.all, :id, :name, {}, {class: "form-control"}) %>	    			        	   	        	   
+		    </div>
+		  </div>
+		</div>
+	</div>	
+	<div class="row">
+		<div class="col-lg-6">
+			<div class="form-group">				
+				<%= f.label :veh_model, class: "col-sm-4 control-label" %>
+		    <div class="col-sm-8">		 		    	
+		    	<%= f.text_field :veh_model, class: "form-control", placeholder: "Vehicle model details" %>	   		        
+		    </div>
+		  </div>
+		</div>
+		<div class="col-lg-6">
+			<div class="form-group">				
+				<%= f.label :seat_capacity, class: "col-sm-4 control-label" %>
+		    <div class="col-sm-8">		 		    	
+		    	<%= f.text_field :seat_capacity, class: "form-control", placeholder: "Seat capacity" %>	   		        
+		    </div>
+		  </div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-lg-6">
+			<div class="form-group" id="data_1">				
+				<%= f.label :on_fleet_on, class: "col-sm-4 control-label" %>
+		    <div class="col-sm-8">
+		    	<div class="input-group date">
+		        <span class="input-group-addon">
+		        <i class="fa fa-calendar"></i>
+		        </span>		
+		        	<%= f.text_field :on_fleet_on, class: "form-control" %>		        		       
+		      </div>
+		    </div>
+		  </div>
+	  </div>
+		<div class="col-lg-6">
+			<div class="form-group">				
+				<%= f.label :plate_no, class: "col-sm-4 control-label" %>
+		    <div class="col-sm-8">		 		    	
+		    	<%= f.text_field :plate_no, class: "form-control", placeholder: "Plate number" %>	   		        
+		    </div>
+		  </div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-lg-6">
+			<div class="form-group">				
+				<%= f.label :chassis_no, class: "col-sm-4 control-label" %>
+		    <div class="col-sm-8">		 		    	
+		    	<%= f.text_field :chassis_no, class: "form-control", placeholder: "Chassis number" %>	   		        
+		    </div>
+		  </div>
+		</div>
+		<div class="col-lg-6">
+			<div class="form-group">				
+				<%= f.label :engine_no, class: "col-sm-4 control-label" %>
+		    <div class="col-sm-8">		 		    	
+		    	<%= f.text_field :engine_no, class: "form-control", placeholder: "Engine number" %>	   		        
+		    </div>
+		  </div>
+		</div>
+	</div>
+	<div class="hr-line-dashed"></div>
+	<div class="row">
+		<div class="col-lg-3 pull-right">
+			<%= button_tag(type: 'Submit', class: "btn btn-primary btn-block") do %>
+        <i class="icon-ok icon-white"></i> Save
+      <% end %> 
+		</div>
+		<div class="col-lg-3 pull-right">
+			<%= link_to root_path, class: "btn btn-default btn-block" do %>
+        <i class="icon-ok icon-white"></i> Cancel
+      <% end %> 
+		</div>
+	</div>
+
+	<script type="text/javascript">
+
+  		$('#data_1 .input-group.date').datepicker({
+          todayBtn: "linked",
+          keyboardNavigation: false,
+          forceParse: false,       
+          autoclose: true
+      });
+
+	</script>
+<% end %>

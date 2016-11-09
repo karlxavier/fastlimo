@@ -1,4 +1,4 @@
-<nav class="navbar-default navbar-static-side" role="navigation" style="position: fixed;>
+<nav class="navbar-default navbar-static-side" role="navigation" style="position: fixed;"">
 	<div class="sidebar-collapse">
 		<ul class="nav metismenu" id="side-menu">
       
@@ -21,15 +21,14 @@
                   <li><%= link_to('Logout', destroy_user_session_path, :method => :delete) %></li>
               </ul>
           </div>
-          <div class="logo-element">
-              IN+
+          <div class="logo-element">  
           </div>
       </li>
       <li>
       	<%= link_to root_path do %>
         	<i class="fa fa-home"></i> <span class="nav-label">Home</span>
         <% end %>
-      </li>
+      </li> 
       <li>
       	<%= link_to new_corporate_booking_path(corporate_id: current_user.corporate_id) do %>       
         	<i class="fa fa-book"></i> 
@@ -44,53 +43,105 @@
       </li>
       <% if current_user.super %>
         <li>
-          <%= link_to all_bookings_path do %>       
-            <i class="fa fa-book"></i> 
-            <span class="nav-label">Execute Bookings</span>
-          <% end %>
+          <a href="#">
+            <i class="fa fa-th-large"></i> 
+            <span class="nav-label">Bookings</span> 
+            <span class="fa arrow"></span>
+          </a>
+          <ul class="nav nav-second-level collapse ">
+            <li>
+              <%= link_to all_bookings_path do %>       
+                <i class="fa fa-book"></i> 
+                <span class="nav-label">Execute Bookings</span>
+              <% end %>
+            </li>
+            <li>
+              <%= link_to finished_bookings_path do %>       
+                <i class="fa fa-book"></i> 
+                <span class="nav-label">Finished Bookings</span>
+              <% end %>
+            </li>
+          </ul>
         </li>
         <li>
-          <%= link_to finished_bookings_path do %>       
-            <i class="fa fa-book"></i> 
-            <span class="nav-label">Finished Bookings</span>
-          <% end %>
-        </li>
-      	<li>
-          <%= link_to corporates_path do %>       
-            <i class="fa fa-bank"></i> 
-            <span class="nav-label">Corporate Lists</span>
-          <% end %>
+          <a href="#">
+            <i class="fa fa-th-large"></i> 
+            <span class="nav-label">Corporates</span> 
+            <span class="fa arrow"></span>
+          </a>
+          <ul class="nav nav-second-level collapse ">
+            <li>
+              <%= link_to corporates_path do %>       
+                <i class="fa fa-bank"></i> 
+                <span class="nav-label">Corporate Lists</span>
+              <% end %>
+            </li>
+            <li>
+              <%= link_to new_corporate_path do %>       
+                <i class="fa fa-address-card"></i> 
+                <span class="nav-label">New Corporate</span>
+              <% end %>
+            </li>  
+          </ul>
         </li>
         <li>
-          <%= link_to drivers_path do %>       
-            <i class="fa fa-user-circle"></i> 
-            <span class="nav-label">Driver's Lists</span>
-          <% end %>
-        </li>
-        <li class="special_link">
-          <%= link_to new_corporate_path do %>       
-            <i class="fa fa-address-card"></i> 
-            <span class="nav-label">New Corporate Client</span>
-          <% end %>
-        </li>   
-    <!--     <li class="special_link">
-          <%= link_to new_user_registration_path do %>       
+          <a href="#">
             <i class="fa fa-users"></i> 
-            <span class="nav-label">New Corporate Users</span>
-          <% end %>
-        </li>   -->
-        <li class="special_link">
-          <%= link_to new_driver_path do %>       
-            <i class="fa fa-user-circle-o"></i> 
-            <span class="nav-label">New Limo Driver</span>
-          <% end %>
-        </li> 
-        <li class="special_link">
-          <%= link_to new_user_corporates_path, remote: true do %>       
-            <i class="fa fa-user-circle-o"></i> 
-            <span class="nav-label">New Corporate User</span>
-          <% end %>
-        </li> 
+            <span class="nav-label">Drivers</span> 
+            <span class="fa arrow"></span>
+          </a>
+          <ul class="nav nav-second-level collapse ">
+            <li>
+              <%= link_to drivers_path do %>       
+                <i class="fa fa-user-circle"></i> 
+                <span class="nav-label">All Drivers</span>
+              <% end %>
+            </li>
+            <li>
+              <%= link_to new_driver_path do %>       
+                <i class="fa fa-plus"></i> 
+                <span class="nav-label">New Driver</span>
+              <% end %>
+            </li> 
+          </ul>
+        </li>
+        <li>
+          <a href="#">
+            <i class="fa fa-car"></i> 
+            <span class="nav-label">Vehicles</span> 
+            <span class="fa arrow"></span>
+          </a>
+          <ul class="nav nav-second-level collapse ">
+            <li>
+              <%= link_to vehicles_path do %>       
+                <i class="fa fa-user-circle"></i> 
+                <span class="nav-label">All Vehicles</span>
+              <% end %>
+            </li>
+            <li>
+              <%= link_to new_vehicle_path do %>       
+                <i class="fa fa-plus"></i> 
+                <span class="nav-label">New Vehicle</span>
+              <% end %>
+            </li> 
+          </ul>
+        </li>
+        <li>
+          <a href="#">
+            <i class="fa fa-cogs"></i> 
+            <span class="nav-label">Settings</span> 
+            <span class="fa arrow"></span>
+          </a>
+          <ul class="nav nav-second-level collapse ">
+            <li>
+              <%= link_to new_user_corporates_path, remote: true do %>       
+                <i class="fa fa-user-plus"></i> 
+                <span class="nav-label">New User Client</span>
+              <% end %>
+            </li> 
+          </ul>
+        </li>
+               
       <% end %>
 		</ul>
 	</div>

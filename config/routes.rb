@@ -14,6 +14,8 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :vehicles
+
   get 'bookingmap/:book_id', :to => 'bookings#bookingmap', :as => :bookingmap
   get 'finished_bookings', :to => 'bookings#finished_bookings', :as => :finished_bookings
   get 'all_bookings', :to => 'bookings#all_bookings', :as => :all_bookings
