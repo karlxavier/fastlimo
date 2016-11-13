@@ -53,10 +53,12 @@
                                     <% @bookings.each do |booking| %>
                                         <tr role="row">                                      
                                             <td class="project-status">
-                                                <h4 class="text-success"><%= truncate(booking.corporate.name, length: 10) %></h4>
+                                                <h4><%= truncate(booking.corporate.name, length: 15) %></h4>
                                             </td>
-                                            <td class="project-status">
-                                                <h4><%= booking.reference_no %></h4>
+                                            <td class="project-status">                                                
+                                                <%= link_to corporate_booking_path(corporate_id: booking.corporate_id, id: booking.id) do %>                                                           
+                                                    <h4><%= booking.reference_no %></h4>
+                                                <% end %>
                                             </td>
                                             <td class="project-status">
                                                 <p><%= booking.book_date.strftime('%m/%d/%Y') %></p>
@@ -91,8 +93,8 @@
             buttons: [
                 { extend: 'copy'},
                 {extend: 'csv'},
-                {extend: 'excel', title: 'ExampleFile'},
-                {extend: 'pdf', title: 'ExampleFile'},
+                {extend: 'excel', title: 'Fastlimo - Finished Bookings'},
+                {extend: 'pdf', title: 'Fastlimo - Finished Bookings'},
 
                 {extend: 'print',
                  customize: function (win){
