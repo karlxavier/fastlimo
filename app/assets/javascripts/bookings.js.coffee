@@ -1,0 +1,2 @@
+jQuery ->
+	$('#bookings-table')
