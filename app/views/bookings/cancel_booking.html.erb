@@ -1,6 +1,6 @@
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-10">
-        <h2>Execute Bookings</h2>
+        <h2>Cancel Bookings</h2>
         <ol class="breadcrumb">
             <li>
                 <%= link_to 'Home', root_path %>
@@ -9,7 +9,7 @@
                 <a>Bookings</a>
             </li>
             <li class="active">
-                <strong>Execute</strong>
+                <strong>Cancel</strong>
             </li>
         </ol>
     </div>
@@ -22,7 +22,7 @@
         <div class="col-lg-12">
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
-                    <h5>Execute - <small>Select the driver and execute.</small></h5>                  
+                    <h5>Cancel - <small>Cancel this booking and choose the reason.</small></h5>                  
                 </div>
                 <div class="ibox-content">
                     <div class="row">
@@ -78,15 +78,27 @@
                             </div>            
                         </div>
                         <div class="col-sm-6">
-                            <%= form_for @booking, url: confirm_execute_path(@booking), html: { class: 'form-horizontal' } do |f|  %>
+                            <% if @booking.driver_id.present? %>
+                            
+                                    <div class="row">
+                                        <div class="col-lg-12 ">
+                                            <label class="control-label pull-left">Driver</label>
+                                        </div>
+                                        <div class="col-lg-12">
+                                            <p class="form-control-static"><%= @booking.driver.name %></p>  
+                                        </div>
+                                    </div> 
+                         
+                            <% end %>
+                            <%= form_for [@corporate, @booking], html: { class: 'form-horizontal' } do |f|  %>
                                 <div class="row">
                                     <div class="col-sm-12 ">
-                                        <label class="control-label pull-left">Driver</label>
+                                        <label class="control-label pull-left">Reason</label>
                                     </div>
                                 </div>
                                 <div class="row">                              
                                     <div class="col-sm-12">
-                                        <%= f.collection_select(:driver_id, Driver.where('driver_status_id IN (?)', 1), :id, :name, {}, {class: "form-control"}) %>                                                   
+                                        <%= f.collection_select(:cancel_reason_id, CancelReason.all, :id, :reason, {}, {class: "form-control"}) %>                                                   
                                     </div>
                                 </div>
                                 <br>
@@ -97,18 +109,7 @@
                                 </div>
                                 <div class="row">                              
                                     <div class="col-sm-12">
-                                        <%= f.text_field :price, class: "form-control", placeholder: "Booking price" %>                                                                             
-                                    </div>
-                                </div>
-                                <br>
-                                <div class="row">
-                                    <div class="col-sm-12 ">
-                                        <label class="control-label pull-left">Remarks</label>
-                                    </div>
-                                </div>
-                                <div class="row">                              
-                                    <div class="col-sm-12">
-                                        <%= f.text_field :execute_remarks, class: "form-control", placeholder: "Remarks to client." %>                                            
+                                        <%= f.text_field :price, class: "form-control", placeholder: "Booking price" %>                                            
                                         <%= f.hidden_field :booking_status_id, value: 2 %>
                                         <%= f.hidden_field :executed_on, value: Time.now %>
                                     </div>
@@ -116,15 +117,10 @@
                                 <br>
                                 <div class="row">
                                     <div class="col-lg-6 pull-right">
-                                        <%= button_tag(type: 'Submit', class: "btn btn-primary btn-block") do %>
-                                            <i class="icon-ok icon-white"></i> Execute
-                                        <% end %>
-                                    </div>
-                                    <div class="col-lg-6 pull-right">
-                                        <%= link_to all_bookings_path, class: "btn btn-default btn-block" do %>
-                                    <i class="icon-ok icon-white"></i> Cancel
-                                  <% end %> 
-                                    </div>
+                                        <%= button_tag(type: 'Submit', class: "btn btn-danger btn-block") do %>
+                                            <i class="icon-ok icon-white"></i> Cancel
+                                        <% end %> 
+                                    </div>                                   
                                 </div>
                             <% end %>
                         </div>

@@ -13,7 +13,7 @@ class BookingsController < ApplicationController
 	end
 
 	def show
-		@booking = Booking.find(params[:id])
+		@booking = Booking.find(params[:id]) 
 	end
 
 	def new
@@ -38,7 +38,17 @@ class BookingsController < ApplicationController
 	def update
 		@booking = Booking.find(params[:id])
 
-		if @booking.update_attributes(booking_params)
+		if @booking.update_attributes(booking_params)		
+			redirect_to all_bookings_path
+		else
+			render 'edit'
+		end
+	end
+
+	def confirm_execute
+		@booking = Booking.find(params[:book_id])
+
+		if @booking.update_attributes(confirm_execute_params)
 			if @booking.booking_status_id == 2
 				@driver = Driver.find(@booking.driver_id)
 				@driver.driver_status_id = 2
@@ -46,7 +56,7 @@ class BookingsController < ApplicationController
 			end
 			redirect_to all_bookings_path
 		else
-			render 'edit'
+			redirect_to exe_bookings_path(book_id: @booking.id)
 		end
 	end
 
@@ -59,7 +69,7 @@ class BookingsController < ApplicationController
 		@corporate = Corporate.find(@booking.corporate_id)
 	end
 
-	def finish_booking
+	def finish_booking		
 		@booking = Booking.find(params[:book_id])
 		@driver = Driver.find(@booking.driver_id)
 
@@ -76,6 +86,30 @@ class BookingsController < ApplicationController
 
 	def finished_bookings
 		@bookings = Booking.where('booking_status_id IN (?)', 3).order('id desc')
+	end
+
+	def to_cancel_booking
+		@bookings = Booking.where('booking_status_id IN (?)', [1,2]).order('id desc')
+	end
+
+	def cancel_booking
+		@booking = Booking.find(params[:book_id])	
+	end
+
+	def execute_cancel
+		@booking = Booking.find(params[:book_id])
+		@booking.booking_status_id = 4
+
+		if @booking.driver_id.present?
+			@driver = Driver.find(@booking.driver_id)
+			@driver.driver_status_id = 1
+		end
+
+		if @booking.save
+			if @driver.save
+				redirect_to all_bookings_path
+			end
+		end
 	end
 
 	def bookingmap
@@ -105,7 +139,12 @@ class BookingsController < ApplicationController
 																			:remarks,
 																			:executed_on, 
 																			:execute_remarks,
-																			:driver_id )
+																			:driver_id,																	
+																			:cancel_reason_id )
+		end
+
+		def confirm_execute_params
+			params.require(:booking).permit(:driver_id, :price, :booking_status_id, :executed_on, :execute_remarks)
 		end
 
 		def set_corporate

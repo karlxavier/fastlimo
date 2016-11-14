@@ -27,6 +27,7 @@ gem 'geocoder'
 gem 'gmaps4rails'
 gem 'underscore-rails', '~> 1.8', '>= 1.8.3'
 gem 'jquery-datatables-rails', '~> 3.4.0'
+gem 'jquery-turbolinks'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

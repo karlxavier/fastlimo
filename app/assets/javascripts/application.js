@@ -11,8 +11,10 @@
 // about supported directives.
 //
 //= require jquery
-//= require jquery_ujs
-//= require dataTables/jquery.dataTables
+//= require jquery.turbolinks
+//= require jquery_ujs 
 //= require underscore
+//= require turbolinks
+//= require dataTables/jquery.dataTables
 //= require gmaps/google
 //= require_tree .

@@ -1,19 +1,20 @@
 <%= form_for [@corporate, @booking], html: { class: 'form-horizontal' } do |f|  %>
-	
+	<% if @booking.errors.any? %>
+    <% @booking.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+  <% end %>
+
 	<div class="row">
 		<div class="col-lg-6">
 			<div class="form-group" id="data_1">				
 				<%= f.label :book_date, class: "col-sm-4 control-label" %>
 		    <div class="col-sm-8">
-		    	<div class="input-group date">
+		    	<div class="input-group date" id="input-date">
 		        <span class="input-group-addon">
-		        <i class="fa fa-calendar"></i>
-		        </span>
-		        <% if action_name == 'new' %>
-		        	<%= f.text_field :book_date, class: "form-control", value: Time.now.strftime('%m/%d/%Y') %>		        
-		        <% else %>
-		        	<%= f.text_field :book_date, class: "form-control", value: @booking.book_date.strftime('%m/%d/%Y') %>		        
-		        <% end %>
+		        	<i class="fa fa-calendar"></i>
+		        </span>		        
+		   			<%= f.text_field :book_date, class: "form-control" %>	      
 		      </div>
 		    </div>
 		  </div>
@@ -26,7 +27,7 @@
 		        	<%= f.text_field :book_time, class: "form-control", value: '00:00' %>
 		        <% else %>
 		        	<%= f.text_field :book_time, class: "form-control", value: @booking.book_time %>		        
-		        <% end %>
+		      <% end %>
 		    </div>
 		  </div>
 		</div>
@@ -110,28 +111,28 @@
 		</div>
 	</div>
 
-  <script type="text/javascript">
-
-  		$('#data_1 .input-group.date').datepicker({
+<% end %>
+          <script type="text/javascript">
+    $( document ).on('turbolinks:load', function() {
+        // alert("x");
+        $('#data_1 #input-date').datepicker({
           todayBtn: "linked",
           keyboardNavigation: false,
-          forceParse: false,       
+          forceParse: true,  
+          format: 'dd/mm/yyyy',     
           autoclose: true
       });     
 
       $("#geocompleteFrom").geocomplete({     
-        	details: ".field",
+            details: ".field",
             types: ["geocode", "establishment"],
             componentRestrictions: {country: "ae"},
         });
 
       $("#geocompleteTo").geocomplete({     
-        	details: ".field",
+            details: ".field",
             types: ["geocode", "establishment"],
             componentRestrictions: {country: "ae"},
         });
-
-
+     });
   </script>
-
-<% end %>

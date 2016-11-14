@@ -72,25 +72,13 @@
                                         </td>                                      
                                         <td class="project-actions"> 
                                             <%= link_to bookingmap_path(book_id: booking.id), class: "btn btn-default btn-sm", remote: true do %>       
-                                                    <i class="fa fa-globe"></i> 
-                                                    <span class="nav-label">Map</span>
-                                                <% end %>        
-                                            <% if booking.booking_status_id == 1 %>                                                 
-                                                <%= link_to exe_bookings_path(book_id: booking.id), class: "btn btn-success btn-sm" do %>       
-                                                    <i class="fa fa-retweet"></i> 
-                                                    <span class="nav-label">Execute</span>
-                                                <% end %>
-                                            <% elsif booking.booking_status_id == 3 %>
-                                                <%= link_to corporate_booking_path(corporate_id: booking.corporate_id, id: booking.id), class: "btn btn-default btn-sm" do %>       
-                                                    <i class="fa fa-pencil"></i> 
-                                                    <span class="nav-label">View</span>
-                                                <% end %>
-                                            <% elsif booking.booking_status_id == 2 %>                                             
-                                                <%= link_to finish_booking_path(book_id: booking.id), class: "btn btn-warning btn-sm" do %>       
-                                                    <i class="fa fa-retweet"></i> 
-                                                    <span class="nav-label">Finish</span>
-                                                <% end %>
-                                            <% end %>
+                                                <i class="fa fa-globe"></i> 
+                                                <span class="nav-label">Map</span>
+                                            <% end %>  
+                                            <%= link_to cancel_booking_path(book_id: booking.id), class: "btn btn-danger btn-sm" do %>       
+                                                <i class="fa fa-times"></i> 
+                                                <span class="nav-label">Cancel</span>
+                                            <% end %>                                           
                                         </td>
                                     </tr>
                                 <% end %>

@@ -4,16 +4,18 @@ class Booking < ActiveRecord::Base
 	belongs_to :corporate
 	belongs_to :booking_status
 	belongs_to :driver
+  belongs_to :cancel_reason
 	before_create :set_booking_new
 	before_create :generate_ref_id
   before_save :geocode_endpoints
 
 	validate :book_date_is_valid_datetime
 	validate :book_time_is_valid_time
-	validates :passenger_name, :from_name, :to_name, :book_time, :book_date, presence: true
+	validates :passenger_name, :from_name, :to_name, :book_time, :book_date, presence: true, on: :create
+  validates :price, :driver_id, presence: true, on: :update, if: :valid_execution?
 
 	def book_date_is_valid_datetime	
-    errors.add(:book_date, 'must be a valid datetime') if ((DateTime.parse(book_date.strftime "%m/%d/%Y") rescue ArgumentError) == ArgumentError)
+    # errors.add(:book_date, 'must be a valid datetime') if ((DateTime.parse(book_date.strftime "%m/%d/%Y") rescue ArgumentError) == ArgumentError)
   end
 
   def book_time_is_valid_time
@@ -22,6 +24,10 @@ class Booking < ActiveRecord::Base
 
   def set_booking_new
   	self.booking_status_id = 1
+  end
+
+  def valid_execution?
+    changed.include?("booking_status_id") && !executed_on.blank?
   end
  
   def geocode_endpoints

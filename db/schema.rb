@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161109092108) do
+ActiveRecord::Schema.define(version: 20161114084240) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -37,8 +37,8 @@ ActiveRecord::Schema.define(version: 20161109092108) do
     t.string   "ordered_by"
     t.integer  "payment_type_id"
     t.integer  "corporate_id"
-    t.datetime "created_at",        null: false
-    t.datetime "updated_at",        null: false
+    t.datetime "created_at",                                null: false
+    t.datetime "updated_at",                                null: false
     t.integer  "booking_status_id"
     t.text     "remarks"
     t.integer  "driver_id"
@@ -46,6 +46,14 @@ ActiveRecord::Schema.define(version: 20161109092108) do
     t.text     "execute_remarks"
     t.datetime "executed_on"
     t.datetime "finished_on"
+    t.integer  "cancel_reason_id"
+    t.decimal  "price",             precision: 8, scale: 2
+  end
+
+  create_table "cancel_reasons", force: :cascade do |t|
+    t.string   "reason"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "car_types", force: :cascade do |t|
