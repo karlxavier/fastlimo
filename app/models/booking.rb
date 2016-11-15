@@ -11,6 +11,8 @@ class Booking < ActiveRecord::Base
 
 	validate :book_date_is_valid_datetime
 	validate :book_time_is_valid_time
+  validate :book_date_cannot_be_in_the_past
+  validates :telephone_no, presence: true, numericality: true, length: { minimum: 9, maximum: 12 }
 	validates :passenger_name, :from_name, :to_name, :book_time, :book_date, presence: true, on: :create
   validates :price, presence: true, on: :update, if: :valid_execution?
   validates :driver_id, presence: true, if: :valid_to_execute?
@@ -25,6 +27,12 @@ class Booking < ActiveRecord::Base
 
   def set_booking_new
   	self.booking_status_id = 1
+  end
+
+  def book_date_cannot_be_in_the_past
+    if book_date.present? && book_date < Date.today
+      errors.add(:book_date, "can't be in the past")
+    end
   end
 
   def valid_execution?

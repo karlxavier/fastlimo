@@ -12,7 +12,11 @@
 		  <div class="form-group">				
 				<%= f.label :driver_status_id, class: "col-sm-4 control-label" %>
 		    <div class="col-sm-6">	
-	    		<%= f.collection_select(:driver_status_id, DriverStatus.where('id NOT IN (?)', 3), :id, :status, {}, {class: "form-control"}) %>	    			        	   	        	   
+		    	<% if action_name == 'new' %>
+	    			<%= f.collection_select(:driver_status_id, DriverStatus.where('id IN (?)', [1,3]), :id, :status, {}, {class: "form-control"}) %>	    			        	   	        	   
+	    		<% else %>
+	    			<%= f.collection_select(:driver_status_id, DriverStatus.where('id IN (?)', 3), :id, :status, {}, {class: "form-control"}) %>	    			        	   	        	   
+	    		<% end %>
 		    </div>
 		  </div>
 		</div>
