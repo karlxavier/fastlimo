@@ -96,17 +96,15 @@ class BookingsController < ApplicationController
 		@booking = Booking.find(params[:book_id])
 		@booking.booking_status_id = 4
 
-		if @booking.driver_id.present?
-			@driver = Driver.find(@booking.driver_id)
-			@driver.driver_status_id = 1			
-		end
-
 		if @booking.update_attributes(confirm_cancel_params)
 			if @booking.driver_id.present?
+				@driver = Driver.find(@booking.driver_id)
+				@driver.driver_status_id = 1
 				if @driver.save
-					redirect_to all_bookings_path			
+					# redirect_to to_cancel_booking_path			
 				end
 			end
+			redirect_to to_cancel_booking_path	
 		else
 			if @booking.errors.any?
     		@booking.errors.full_messages.each do |message|
@@ -172,7 +170,7 @@ class BookingsController < ApplicationController
 		end
 
 		def confirm_cancel_params
-			params.require(:booking).permit(:driver_id, :price, :booking_status_id, :cancelled_on, :execute_remarks, :cancelled_by)
+			params.require(:booking).permit(:price, :booking_status_id, :cancelled_on, :execute_remarks, :cancelled_by, :cancel_reason_id)
 		end
 
 		def set_corporate

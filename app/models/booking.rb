@@ -12,7 +12,8 @@ class Booking < ActiveRecord::Base
 	validate :book_date_is_valid_datetime
 	validate :book_time_is_valid_time
 	validates :passenger_name, :from_name, :to_name, :book_time, :book_date, presence: true, on: :create
-  validates :price, :driver_id, presence: true, on: :update, if: :valid_execution?
+  validates :price, presence: true, on: :update, if: :valid_execution?
+  validates :driver_id, presence: true, if: :valid_to_execute?
 
 	def book_date_is_valid_datetime	
     # errors.add(:book_date, 'must be a valid datetime') if ((DateTime.parse(book_date.strftime "%m/%d/%Y") rescue ArgumentError) == ArgumentError)
@@ -29,6 +30,10 @@ class Booking < ActiveRecord::Base
   def valid_execution?
     changed.include?("booking_status_id")
     # changed.include?("booking_status_id") && !executed_on.blank?
+  end
+
+  def valid_to_execute?
+    booking_status_id == 2
   end
  
   def geocode_endpoints

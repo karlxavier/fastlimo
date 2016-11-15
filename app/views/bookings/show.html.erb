@@ -94,7 +94,7 @@
                                     <label class="control-label pull-left">Driver</label>
                                 </div>
                                 <div class="col-lg-12">
-                                    <p class="form-control-static"><%= @booking.driver.name %></p>  
+                                    <p class="form-control-static"><%= @booking.driver.name if @booking.driver.present? %></p>  
                                 </div>
                             </div>  
                             <div class="row">
@@ -105,14 +105,25 @@
                                     <p class="form-control-static"><%= @booking.executed_on %></p>  
                                 </div>
                             </div>  
-                            <div class="row">
-                                <div class="col-lg-12 ">
-                                    <label class="control-label pull-left">Finished On</label>
-                                </div>
-                                <div class="col-lg-12">
-                                    <p class="form-control-static"><%= @booking.finished_on %></p>  
-                                </div>
-                            </div>                             
+                            <% if @booking.booking_status_id == 3 %>
+                                <div class="row">
+                                    <div class="col-lg-12 ">
+                                        <label class="control-label pull-left">Finished On</label>
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <p class="form-control-static"><%= @booking.finished_on %></p>  
+                                    </div>
+                                </div>    
+                            <% elsif @booking.booking_status_id == 4 %>
+                                <div class="row">
+                                    <div class="col-lg-12 ">
+                                        <label class="control-label pull-left">Cancelled On</label>
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <p class="form-control-static"><%= @booking.cancelled_on %></p>  
+                                    </div>
+                                </div>  
+                            <% end %>                        
                             <% if current_user.super? %>
                                 <div class="row">
                                     <div class="col-lg-12 ">
