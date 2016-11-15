@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161114084240) do
+ActiveRecord::Schema.define(version: 20161115044913) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -48,6 +48,10 @@ ActiveRecord::Schema.define(version: 20161114084240) do
     t.datetime "finished_on"
     t.integer  "cancel_reason_id"
     t.decimal  "price",             precision: 8, scale: 2
+    t.datetime "cancelled_on"
+    t.string   "executed_by"
+    t.string   "finished_by"
+    t.string   "cancelled_by"
   end
 
   create_table "cancel_reasons", force: :cascade do |t|

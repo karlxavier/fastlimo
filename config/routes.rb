@@ -18,9 +18,10 @@ Rails.application.routes.draw do
 
   get 'to_cancel_booking', :to => 'bookings#to_cancel_booking', :as => :to_cancel_booking
   get 'cancel_booking/:book_id', :to => 'bookings#cancel_booking', :as => :cancel_booking
-  get 'execute_cancel/:book_id', :to => 'bookings#execute_cancel', :as => :execute_cancel
+  patch 'execute_cancel/:book_id', :to => 'bookings#execute_cancel', :as => :execute_cancel
   get 'bookingmap/:book_id', :to => 'bookings#bookingmap', :as => :bookingmap
   get 'finished_bookings', :to => 'bookings#finished_bookings', :as => :finished_bookings
+  get 'cancelled_bookings', :to => 'bookings#cancelled_bookings', :as => :cancelled_bookings
   get 'all_bookings', :to => 'bookings#all_bookings', :as => :all_bookings
   get 'exe_bookings/:book_id', :to => 'bookings#exe_bookings', :as => :exe_bookings
   patch 'confirm_execute/:book_id', :to => 'bookings#confirm_execute', :as => :confirm_execute

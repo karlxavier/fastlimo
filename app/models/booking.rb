@@ -27,7 +27,8 @@ class Booking < ActiveRecord::Base
   end
 
   def valid_execution?
-    changed.include?("booking_status_id") && !executed_on.blank?
+    changed.include?("booking_status_id")
+    # changed.include?("booking_status_id") && !executed_on.blank?
   end
  
   def geocode_endpoints

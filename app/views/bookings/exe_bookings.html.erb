@@ -110,6 +110,7 @@
                                     <div class="col-sm-12">
                                         <%= f.text_field :execute_remarks, class: "form-control", placeholder: "Remarks to client." %>                                            
                                         <%= f.hidden_field :booking_status_id, value: 2 %>
+                                        <%= f.hidden_field :executed_by, value: current_user.fullname %>
                                         <%= f.hidden_field :executed_on, value: Time.now %>
                                     </div>
                                 </div>

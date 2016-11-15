@@ -1,4 +1,5 @@
 <div class="row wrapper border-bottom white-bg page-heading">
+
     <div class="col-lg-10">
         <h2>Cancel Bookings</h2>
         <ol class="breadcrumb">
@@ -90,7 +91,7 @@
                                     </div> 
                          
                             <% end %>
-                            <%= form_for [@corporate, @booking], html: { class: 'form-horizontal' } do |f|  %>
+                            <%= form_for @booking, url: execute_cancel_path(@booking), html: { class: 'form-horizontal' } do |f|  %>
                                 <div class="row">
                                     <div class="col-sm-12 ">
                                         <label class="control-label pull-left">Reason</label>
@@ -110,15 +111,16 @@
                                 <div class="row">                              
                                     <div class="col-sm-12">
                                         <%= f.text_field :price, class: "form-control", placeholder: "Booking price" %>                                            
-                                        <%= f.hidden_field :booking_status_id, value: 2 %>
-                                        <%= f.hidden_field :executed_on, value: Time.now %>
+                                        <%= f.hidden_field :cancelled_by, value: current_user.fullname if current_user.fullname.present? %>
+                                        <%= f.hidden_field :booking_status_id, value: 4 %>
+                                        <%= f.hidden_field :cancelled_on, value: Time.now %>
                                     </div>
                                 </div>
                                 <br>
                                 <div class="row">
                                     <div class="col-lg-6 pull-right">
                                         <%= button_tag(type: 'Submit', class: "btn btn-danger btn-block") do %>
-                                            <i class="icon-ok icon-white"></i> Cancel
+                                            <i class="icon-ok icon-white"></i> Cancel this Booking
                                         <% end %> 
                                     </div>                                   
                                 </div>

@@ -73,6 +73,7 @@ class BookingsController < ApplicationController
 		@booking = Booking.find(params[:book_id])
 		@driver = Driver.find(@booking.driver_id)
 
+		@booking.finished_by = current_user.fullname
 		@booking.booking_status_id = 3
 		@booking.finished_on  = Time.now
 		@driver.driver_status_id = 1
@@ -81,34 +82,38 @@ class BookingsController < ApplicationController
 			if @driver.save
 				redirect_to all_bookings_path
 			end
+		else
+			if @booking.errors.any?
+    		@booking.errors.full_messages.each do |message|
+      		puts message
+    		end
+  		end
+  		redirect_to all_bookings_path
 		end
 	end
 
-	def finished_bookings
-		@bookings = Booking.where('booking_status_id IN (?)', 3).order('id desc')
-	end
-
-	def to_cancel_booking
-		@bookings = Booking.where('booking_status_id IN (?)', [1,2]).order('id desc')
-	end
-
-	def cancel_booking
-		@booking = Booking.find(params[:book_id])	
-	end
-
-	def execute_cancel
+	def execute_cancel		
 		@booking = Booking.find(params[:book_id])
 		@booking.booking_status_id = 4
 
 		if @booking.driver_id.present?
 			@driver = Driver.find(@booking.driver_id)
-			@driver.driver_status_id = 1
+			@driver.driver_status_id = 1			
 		end
 
-		if @booking.save
-			if @driver.save
-				redirect_to all_bookings_path
+		if @booking.update_attributes(confirm_cancel_params)
+			if @booking.driver_id.present?
+				if @driver.save
+					redirect_to all_bookings_path			
+				end
 			end
+		else
+			if @booking.errors.any?
+    		@booking.errors.full_messages.each do |message|
+      		puts message
+    		end
+  		end
+			redirect_to cancel_booking_path(params[:book_id])
 		end
 	end
 
@@ -117,6 +122,22 @@ class BookingsController < ApplicationController
 		respond_to do |format|
 			format.js
 		end
+	end
+
+	def finished_bookings
+		@bookings = Booking.where('booking_status_id IN (?)', 3).order('id desc')
+	end
+
+	def cancelled_bookings
+		@bookings = Booking.where('booking_status_id IN (?)', 4).order('id desc')
+	end
+
+	def to_cancel_booking
+		@bookings = Booking.where('booking_status_id IN (?)', [1,2]).order('id desc')
+	end
+
+	def cancel_booking
+		@booking = Booking.find(params[:book_id])	
 	end
 
 	private
@@ -139,12 +160,19 @@ class BookingsController < ApplicationController
 																			:remarks,
 																			:executed_on, 
 																			:execute_remarks,
-																			:driver_id,																	
+																			:driver_id,		
+																			:executed_by,
+																			:finished_by,
+																			:cancelled_by,
 																			:cancel_reason_id )
 		end
 
 		def confirm_execute_params
-			params.require(:booking).permit(:driver_id, :price, :booking_status_id, :executed_on, :execute_remarks)
+			params.require(:booking).permit(:driver_id, :price, :booking_status_id, :executed_on, :execute_remarks, :executed_by)
+		end
+
+		def confirm_cancel_params
+			params.require(:booking).permit(:driver_id, :price, :booking_status_id, :cancelled_on, :execute_remarks, :cancelled_by)
 		end
 
 		def set_corporate
