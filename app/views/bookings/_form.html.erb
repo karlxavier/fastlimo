@@ -62,7 +62,7 @@
 		</div>
 		<div class="col-lg-6">
 			<div class="form-group">				
-				<%= f.label :telephone_no, class: "col-sm-4 control-label" %>
+				<strong><p class="col-sm-4 control-label">Contact No.</p></strong>	
 		    <div class="col-sm-8">		 		    	
 		    	<%= f.text_field :telephone_no, class: "form-control", placeholder: "050#######" %>	   		        
 		    </div>
@@ -81,8 +81,8 @@
 	</div>
 	<div class="row">
 		<div class="col-lg-6">
-			<div class="form-group">				
-				<%= f.label :from_name, class: "col-sm-4 control-label" %>
+			<div class="form-group">								
+				<strong><p class="col-sm-4 control-label">Pickup</p></strong>	
 		    <div class="col-sm-8">		    		        
 		      <%= f.text_field :from_name, id: "geocompleteFrom", class: "form-control", placeholder: "From Address" %>	   		        	   
 		    </div>
@@ -90,7 +90,7 @@
 		</div>
 		<div class="col-lg-6">
 			<div class="form-group">
-				<%= f.label :to_name, class: "col-sm-4 control-label" %>
+				<strong><p class="col-sm-4 control-label">Dropoff</p></strong>	
 		    <div class="col-sm-8">		    
 		        <%= f.text_field :to_name, id: "geocompleteTo", class: "form-control", placeholder: "To Address" %>	   		        	   
 		    </div>
