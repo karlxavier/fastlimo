@@ -178,11 +178,7 @@ class BookingsController < ApplicationController
 		end		
 
 		def send_text_to_driver(book_id)
-			begin
-				puts '********************************'
-				puts book_id
-		    @booking = Booking.find(book_id)
-
+			begin	
 		    twilio_sid = ENV["TWILIO_ACCOUNT_SID"]
 		    twilio_token = ENV["TWILIO_AUTH_TOKEN"]
 		    twilio_phone_number = ENV["TWILIO_NUMBER"]
