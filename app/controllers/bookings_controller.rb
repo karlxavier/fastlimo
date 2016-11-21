@@ -53,8 +53,8 @@ class BookingsController < ApplicationController
 				@driver = Driver.find(@booking.driver_id)
 				@driver.driver_status_id = 2
 				@driver.save
-			end
-			redirect_to all_bookings_path
+			end			
+			send_text_to_driver(params[:book_id])			
 		else
 			redirect_to exe_bookings_path(book_id: @booking.id)
 		end
@@ -175,6 +175,30 @@ class BookingsController < ApplicationController
 
 		def set_corporate
 			@corporate = Corporate.find(current_user.corporate_id)
+		end		
+
+		def send_text_to_driver(book_id)
+			begin
+				puts '********************************'
+				puts book_id
+		    @booking = Booking.find(book_id)
+
+		    twilio_sid = ENV["TWILIO_ACCOUNT_SID"]
+		    twilio_token = ENV["TWILIO_AUTH_TOKEN"]
+		    twilio_phone_number = ENV["TWILIO_NUMBER"]
+
+		    puts "SID: #{twilio_sid}"
+
+		    @client = Twilio::REST::Client.new twilio_sid, twilio_token
+		    @client.account.messages.create({
+	        from: twilio_phone_number,
+	        to: @booking.driver.mobile_no,
+	        body: "#{@booking.reference_no}: #{@booking.passenger_name}-#{@booking.telephone_no} FRM: #{@booking.from_name} TO: #{@booking.to_name}"
+	      })	   
+		    redirect_to all_bookings_path
+  	rescue Exception => e
+  		puts "ERROR: #{e.message}"
 		end
+	end
 
 end
