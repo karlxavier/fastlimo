@@ -54,10 +54,33 @@ class BookingsController < ApplicationController
 				@driver.driver_status_id = 2
 				@driver.save
 			end			
-			send_text_to_driver(params[:book_id])			
+			sms_reponse = "#{@booking.reference_no}: #{@booking.passenger_name}-#{@booking.telephone_no} FRM: #{@booking.from_name} TO: #{@booking.to_name}"
+			send_text_to_driver(sms_reponse,@booking.driver.mobile_no)			
 		else
 			redirect_to exe_bookings_path(book_id: @booking.id)
 		end
+	end
+
+	def incoming_sms
+		incoming = Sanitize.clean(params[:From]).gsub(/^\+\d/, '')
+    sms_input = params[:Body].downcase
+
+    begin
+    	@driver = Driver.where(mobile_no: incoming).first
+    	@booking.where(booking_status_id: 2,driver_id: @driver.id).first
+    	if @booking.present?
+    		if sms_input == "1"
+    			@booking.finish_booking!
+    			send_text_to_driver("#{@booking.reference_no} is completed. Drive safely! - Maher",@driver.mobile_no)
+    		end
+    	else
+    		send_text_to_driver("You dont have any active bookings now",@driver.mobile_no)
+    	end
+
+    rescue Exception => e
+    	puts '******** ERROR ************'
+    	puts "ERROR: #{e.message}"
+    end
 	end
 
 	def all_bookings		
@@ -177,7 +200,7 @@ class BookingsController < ApplicationController
 			@corporate = Corporate.find(current_user.corporate_id)
 		end		
 
-		def send_text_to_driver(book_id)
+		def send_text_to_driver(message,to_whom)
 			begin	
 		    twilio_sid = ENV["TWILIO_ACCOUNT_SID"]
 		    twilio_token = ENV["TWILIO_AUTH_TOKEN"]
@@ -188,8 +211,8 @@ class BookingsController < ApplicationController
 		    @client = Twilio::REST::Client.new twilio_sid, twilio_token
 		    @client.account.messages.create({
 	        from: twilio_phone_number,
-	        to: @booking.driver.mobile_no,
-	        body: "#{@booking.reference_no}: #{@booking.passenger_name}-#{@booking.telephone_no} FRM: #{@booking.from_name} TO: #{@booking.to_name}"
+	        to: to_whom,
+	        body: message
 	      })	   
 		    redirect_to all_bookings_path
   	rescue Exception => e

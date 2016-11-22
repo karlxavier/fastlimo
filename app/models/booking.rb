@@ -40,6 +40,10 @@ class Booking < ActiveRecord::Base
     # changed.include?("booking_status_id") && !executed_on.blank?
   end
 
+  def finish_booking!
+    self.update(booking_status_id: 3)
+  end
+
   def valid_to_execute?
     booking_status_id == 2
   end
