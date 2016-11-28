@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  tname: MyString
+  valid: false
+  coporate_id: 1
+  payment_type: MyString
+
+two:
+  tname: MyString
+  valid: false
+  coporate_id: 1
+  payment_type: MyString

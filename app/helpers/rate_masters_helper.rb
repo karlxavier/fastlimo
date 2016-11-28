@@ -1,0 +1,2 @@
+module RateMastersHelper
+end

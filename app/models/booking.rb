@@ -9,10 +9,10 @@ class Booking < ActiveRecord::Base
 	before_create :generate_ref_id
   before_save :geocode_endpoints
 
-	validate :book_date_is_valid_datetime
+	validate :book_date_is_valid_datetime, on: :create
 	validate :book_time_is_valid_time
-  validate :book_date_cannot_be_in_the_past
-  validates :telephone_no, presence: true, numericality: true, length: { minimum: 9, maximum: 12 }
+  validate :book_date_cannot_be_in_the_past, on: :create
+  validates :telephone_no, presence: true, numericality: true, length: { minimum: 9, maximum: 12 }, on: :create
 	validates :passenger_name, :from_name, :to_name, :book_time, :book_date, presence: true, on: :create
   validates :price, presence: true, on: :update, if: :valid_execution?
   validates :driver_id, presence: true, if: :valid_to_execute?

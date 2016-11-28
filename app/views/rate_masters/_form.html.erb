@@ -1,0 +1,25 @@
+<%= form_for @rate_master, html: { class: 'form-horizontal' } do |f|  %>
+	<div class="row">
+		<div class="col-lg-6">
+		  <div class="form-group">				
+				<strong><p class="col-sm-4 control-label">Pickup</p></strong>	
+		    <div class="col-sm-6">	
+	    		<%= f.collection_select(:payment_type_id, PaymentType.all, :id, :name, {}, {class: "form-control"}) %>	    			        	   	        	   
+		    </div>
+		  </div>
+		</div>
+		<div class="col-lg-6">
+		  <div class="form-group">				
+				<strong><p class="col-sm-4 control-label">Dropoff</p></strong>	
+		    <div class="col-sm-6">			    	
+	    		<%= f.collection_select(:coporate_id, @corporates, :id, :name, {}, {class: "form-control"}) %>	    			        	   	        	   
+		    </div>
+		  </div>
+		</div>
+	</div>
+	<%= f.fields_for :rate_details do |builder| %>
+		<div id="div_rate_details">
+			
+		</div>
+	<% end %>
+<% end %>

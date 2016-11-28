@@ -54,15 +54,17 @@
                                         <td class="project-status">
                                             <h4 class="text-success"><%= truncate(booking.corporate.name, length: 10) %></h4>
                                         </td>
-                                        <td class="project-status">
-                                            <h4><%= booking.reference_no %></h4>
+                                        <td class="project-title">
+                                            <a href="#"><%= booking.reference_no %></a>
+                                            <br>
+                                            <small><%= booking.book_date.strftime('%m/%d/%Y') %></small>
                                         </td>
                                         <td class="project-title">                                                                                        
                                             <a href="#">
                                                 <%= booking.passenger_name %>
                                             </a>
                                             <br>
-                                            <small><%= booking.book_date.strftime('%m/%d/%Y') %></small>
+                                            <small><%= booking.telephone_no %></small>
                                         </td>
                                         <td class="project-completion">
                                             <small><%= truncate(booking.from_name, length: 30) %></small>                                              

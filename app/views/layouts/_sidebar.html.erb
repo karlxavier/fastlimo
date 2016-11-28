@@ -71,77 +71,15 @@
               <% end %>
             </li>
           </ul>
-        </li>
-        <li>
-          <a href="#">
-            <i class="fa fa-institution"></i> 
-            <span class="nav-label">Corporates</span> 
-            <span class="fa arrow"></span>
-          </a>
-          <ul class="nav nav-second-level collapse ">
-            <li>
-              <%= link_to corporates_path do %>       
-                <i class="fa fa-bank"></i> 
-                <span class="nav-label">Corporate Lists</span>
-              <% end %>
-            </li>
-            <li>
-              <%= link_to new_corporate_path do %>       
-                <i class="fa fa-address-card"></i> 
-                <span class="nav-label">New Corporate</span>
-              <% end %>
-            </li>  
-          </ul>
-        </li>
-        <li>
-          <a href="#">
-            <i class="fa fa-users"></i> 
-            <span class="nav-label">Drivers</span> 
-            <span class="fa arrow"></span>
-          </a>
-          <ul class="nav nav-second-level collapse ">
-            <li>
-              <%= link_to drivers_path do %>       
-                <i class="fa fa-user-circle"></i> 
-                <span class="nav-label">All Drivers</span>
-              <% end %>
-            </li>
-            <li>
-              <%= link_to new_driver_path do %>       
-                <i class="fa fa-plus"></i> 
-                <span class="nav-label">New Driver</span>
-              <% end %>
-            </li> 
-          </ul>
-        </li>
-        <li>
-          <a href="#">
-            <i class="fa fa-car"></i> 
-            <span class="nav-label">Vehicles</span> 
-            <span class="fa arrow"></span>
-          </a>
-          <ul class="nav nav-second-level collapse ">
-            <li>
-              <%= link_to vehicles_path do %>       
-                <i class="fa fa-car"></i> 
-                <span class="nav-label">All Vehicles</span>
-              <% end %>
-            </li>
-            <li>
-              <%= link_to new_vehicle_path do %>       
-                <i class="fa fa-plus"></i> 
-                <span class="nav-label">New Vehicle</span>
-              <% end %>
-            </li> 
-          </ul>
-        </li>
+        </li>      
+       
         <li>
           <a href="#">
             <i class="fa fa-cogs"></i> 
             <span class="nav-label">Settings</span> 
             <span class="fa arrow"></span>
           </a>
-          <ul class="nav nav-second-level collapse ">
+          <ul class="nav nav-second-level collapse "> 
             <li>
               <%= link_to new_user_corporates_path, remote: true do %>       
                 <i class="fa fa-user-plus"></i> 

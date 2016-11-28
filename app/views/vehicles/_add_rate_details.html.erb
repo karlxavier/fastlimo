@@ -1,0 +1,26 @@
+	<div class="row">
+		<div class="col-lg-4">
+		  <div class="form-group">				
+				<strong><p class="col-sm-4 control-label">Pickup</p></strong>	
+		    <div class="col-sm-6">	
+	    		<%= f.collection_select(:pickup, Location.all, :id, :name, {}, {class: "form-control"}) %>	    			        	   	        	   
+		    </div>
+		  </div>
+		</div>
+		<div class="col-lg-4">
+		  <div class="form-group">				
+				<strong><p class="col-sm-4 control-label">Dropoff</p></strong>	
+		    <div class="col-sm-6">			    	
+	    		<%= f.collection_select(:dropoff, Location.all, :id, :name, {}, {class: "form-control"}) %>	    			        	   	        	   
+		    </div>
+		  </div>
+		</div>
+		<div class="col-lg-4">
+			<div class="form-group">				
+				<strong><p class="col-sm-4 control-label">Rate</p></strong>	
+		    <div class="col-sm-8">		 		    	
+		    	<%= f.text_field :amount, class: "form-control", placeholder: "Rate Amount" %>	   		        
+		    </div>
+		  </div>
+		</div>
+	</div>

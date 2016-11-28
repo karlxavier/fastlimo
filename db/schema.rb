@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161115044913) do
+ActiveRecord::Schema.define(version: 20161127111146) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -99,10 +99,33 @@ ActiveRecord::Schema.define(version: 20161115044913) do
     t.boolean  "with_vehicle",     default: false
   end
 
+  create_table "locations", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "payment_types", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "rate_details", force: :cascade do |t|
+    t.integer  "rate_master_id"
+    t.decimal  "amount",         precision: 8, scale: 2
+    t.integer  "pickup"
+    t.integer  "dropoff"
+    t.datetime "created_at",                             null: false
+    t.datetime "updated_at",                             null: false
+  end
+
+  create_table "rate_masters", force: :cascade do |t|
+    t.string   "tname"
+    t.integer  "coporate_id"
+    t.integer  "payment_type_id"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
   end
 
   create_table "users", force: :cascade do |t|

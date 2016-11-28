@@ -14,9 +14,17 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :rate_masters do
+    resources :rate_details
+    collection do
+        get 'add_rate_details', :to => 'rate_masters#add_rate_details', :as => :add_rate_details
+    end
+  end
+
   resources :vehicles
 
-  # get 'send_text_to_driver/:book_id', :to => 'bookings#send_text_to_driver', :as => :send_text_to_driver
+
+  
   post 'incoming_sms', :to => 'bookings#incoming_sms', :as => :incoming_sms
   get 'to_cancel_booking', :to => 'bookings#to_cancel_booking', :as => :to_cancel_booking
   get 'cancel_booking/:book_id', :to => 'bookings#cancel_booking', :as => :cancel_booking
