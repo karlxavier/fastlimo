@@ -57,7 +57,7 @@
                                     <label class="control-label pull-left">From Location</label>
                                 </div>
                                 <div class="col-lg-12">
-                                    <p class="form-control-static"><%= @booking.from_name %></p>  
+                                    <p class="form-control-static"><%= Location.find(@booking.from_name).name %></p>  
                                 </div>
                             </div>      
                             <div class="row">
@@ -65,7 +65,7 @@
                                     <label class="control-label pull-left">To Location</label>
                                 </div>
                                 <div class="col-lg-12">
-                                    <p class="form-control-static"><%= @booking.to_name %></p>  
+                                    <p class="form-control-static"><%= Location.find(@booking.to_name).name %></p>  
                                 </div>
                             </div>   
                             <div class="row">
@@ -89,29 +89,25 @@
                                         <%= f.collection_select(:driver_id, Driver.where('driver_status_id IN (?)', 1), :id, :name, {}, {class: "form-control"}) %>                                                   
                                     </div>
                                 </div>
-                                <br>
-                                <div class="row">
-                                    <div class="col-sm-12 ">
-                                        <label class="control-label pull-left">Price</label>
-                                    </div>
-                                </div>
-                                <div class="row">                              
-                                    <div class="col-sm-12">
-                                        <%= f.text_field :price, class: "form-control", placeholder: "Booking price" %>                                                                             
-                                    </div>
-                                </div>
-                                <br>
+                                <br>                              
+                             
                                 <div class="row">
                                     <div class="col-sm-12 ">
                                         <label class="control-label pull-left">Remarks</label>
                                     </div>
-                                </div>
+                                </div>                               
                                 <div class="row">                              
                                     <div class="col-sm-12">
                                         <%= f.text_field :execute_remarks, class: "form-control", placeholder: "Remarks to client." %>                                            
                                         <%= f.hidden_field :booking_status_id, value: 2 %>
                                         <%= f.hidden_field :executed_by, value: current_user.fullname %>
                                         <%= f.hidden_field :executed_on, value: Time.now %>
+                                    </div>
+                                </div>
+                                <br>
+                                 <div class="row">
+                                    <div class="col-sm-12 ">                                        
+                                        <p class="text-danger">There is no rate defined for this locations.</p>
                                     </div>
                                 </div>
                                 <br>

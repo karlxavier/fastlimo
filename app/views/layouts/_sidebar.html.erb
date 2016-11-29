@@ -39,40 +39,7 @@
      		<% end %>
       </li>
       <% if current_user.super %>
-        <li>
-          <a href="#">
-            <i class="fa fa-th-large"></i> 
-            <span class="nav-label">Bookings</span> 
-            <span class="fa arrow"></span>
-          </a>
-          <ul class="nav nav-second-level collapse ">
-            <li>
-              <%= link_to all_bookings_path do %>       
-                <i class="fa fa-book"></i> 
-                <span class="nav-label">Execute Bookings</span>
-              <% end %>
-            </li>
-            <li>
-              <%= link_to to_cancel_booking_path do %>       
-                <i class="fa fa-book"></i> 
-                <span class="nav-label">Cancel Bookings</span>
-              <% end %>
-            </li>
-            <li>
-              <%= link_to finished_bookings_path do %>       
-                <i class="fa fa-book"></i> 
-                <span class="nav-label">Finished Lists</span>
-              <% end %>
-            </li>
-            <li>
-              <%= link_to cancelled_bookings_path do %>       
-                <i class="fa fa-book"></i> 
-                <span class="nav-label">Cancelled Lists</span>
-              <% end %>
-            </li>
-          </ul>
-        </li>      
-       
+
         <li>
           <a href="#">
             <i class="fa fa-cogs"></i> 

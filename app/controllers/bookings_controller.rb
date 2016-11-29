@@ -14,11 +14,15 @@ class BookingsController < ApplicationController
 
 	def show
 		@booking = Booking.find(params[:id]) 
+		@pickup = Location.find(@booking.from_name).name
+		@dropoff = Location.find(@booking.to_name).name
 	end
 
 	def new
 		@corporate
 		@booking = @corporate.bookings.new
+		# @rate_master = RateMaster.where("corporate_id IN ?", @corporate.id)
+		# @payment_types = PaymentType.where("ID IN ?",@rate_master.payment_type_id)
 	end
 
 	def create
@@ -90,6 +94,9 @@ class BookingsController < ApplicationController
 	def exe_bookings				
 		@booking = Booking.find(params[:book_id])
 		@corporate = Corporate.find(@booking.corporate_id)
+
+		
+		
 	end
 
 	def finish_booking		

@@ -83,8 +83,8 @@
 		<div class="col-lg-6">
 			<div class="form-group">								
 				<strong><p class="col-sm-4 control-label">Pickup</p></strong>	
-		    <div class="col-sm-8">		    		        
-		      <%= f.text_field :from_name, id: "geocompleteFrom", class: "form-control", placeholder: "From Address" %>	   		        	   
+		    <div class="col-sm-8">		    		        		      
+		      <%= f.collection_select(:from_name, Location.all, :id, :name, {}, {class: "form-control"}) %>
 		    </div>
 		  </div>
 		</div>
@@ -92,7 +92,7 @@
 			<div class="form-group">
 				<strong><p class="col-sm-4 control-label">Dropoff</p></strong>	
 		    <div class="col-sm-8">		    
-		        <%= f.text_field :to_name, id: "geocompleteTo", class: "form-control", placeholder: "To Address" %>	   		        	   
+		        <%= f.collection_select(:to_name, Location.all, :id, :name, {}, {class: "form-control"}) %>
 		    </div>
 		  </div>
 		</div>
@@ -123,16 +123,5 @@
           autoclose: true
       });     
 
-      $("#geocompleteFrom").geocomplete({     
-            details: ".field",
-            types: ["geocode", "establishment"],
-            componentRestrictions: {country: "ae"},
-        });
-
-      $("#geocompleteTo").geocomplete({     
-            details: ".field",
-            types: ["geocode", "establishment"],
-            componentRestrictions: {country: "ae"},
-        });
      });
   </script>

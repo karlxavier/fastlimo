@@ -67,10 +67,10 @@
                                             <small><%= booking.telephone_no %></small>
                                         </td>
                                         <td class="project-completion">
-                                            <small><%= truncate(booking.from_name, length: 30) %></small>                                              
+                                            <small><%= Location.find(booking.from_name).name %></small>                                              
                                         </td>    
                                         <td class="project-completion">
-                                            <small><%= truncate(booking.to_name, length: 30) %></small>                                              
+                                            <small><%= Location.find(booking.to_name).name %></small>                                              
                                         </td>                                      
                                         <td class="project-actions"> 
                                             <%= link_to bookingmap_path(book_id: booking.id), class: "btn btn-default btn-sm", remote: true do %>       
